@@ -9,8 +9,7 @@ function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 2.4466152 , lng: -76.5981539},
     zoom: 14.5,
-    styles:
-    [
+    styles:[
       {
         "elementType": "geometry",
         "stylers": [
@@ -211,7 +210,7 @@ function initMap() {
         "elementType": "geometry.fill",
         "stylers": [
           {
-            "color": "#b9d3c2"
+            "color": "#7daeff"
           }
         ]
       },
@@ -224,7 +223,7 @@ function initMap() {
           }
         ]
       }
-    ] 
+    ]
   });
   var infoWindow = new google.maps.InfoWindow({map: map});
 
