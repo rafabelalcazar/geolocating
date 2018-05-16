@@ -17,45 +17,31 @@
     crossorigin="anonymous">
 
   <!-- Mis estilos -->
-  <link rel="stylesheet" href="css/style.css">
-  <style>
-    /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-
-    #map {
-      height: 100%;
-      margin-top: 2.5rem;
-    }
-
-    /* Optional: Makes the sample page fill the window. */
-
-    html,
-    body {
-      height: 100%;
-      padding: 0;
-    }
-  </style>
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <link rel="stylesheet" href="css/stylemap.css">
 </head>
 
 <body>
-  	<header>
-        <nav class="nav nav-bar bg-dark fixed-top p-2 justify-content-between ">
-          <div>
-            <a href="index.html">
-              <i class="fab fa-accusoft"></i>
-              <span class="text-uppercase">movepopayán</span>
-            </a>				
-          </div>
-    
-          <div>
-            <a href="#">
-              <span class="d-none d-md-inline">MENÚ</span>
-              <i class="fas fa-bars pl-2"></i>
-            </a>
-          </div>
-        </nav>
-      </header>
-  <div id="map"></div>
+  <header>
+    <nav class="nav nav-bar bg-dark fixed-top p-2 justify-content-between ">
+      <div>
+        <a href="index.html">
+          <i class="fab fa-accusoft"></i>
+          <span class="text-uppercase">movepopayán</span>
+        </a>
+      </div>
+
+      <div>
+        <a href="#">
+          <span class="d-none d-md-inline">MENÚ</span>
+          <i class="fas fa-bars pl-2"></i>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <div id="map" onmouseover="myFunction()"></div>
+
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
@@ -65,6 +51,17 @@
     crossorigin="anonymous"></script>
   <script src="js/ubicacion.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDofv40C3A72DWtGGWNr3abXR0uA3p5KP4&callback=initMap">
+  </script>
+  <!-- El siguiente Script tendra la cuncion que permite almacenar las coordenadas GPS cada t segundos -->
+  <script>
+    var t=3000;
+    function myFunction() {
+      setInterval(function () {
+        console.log(posicion)       
+       }, t);
+    }
+
+
   </script>
 </body>
 

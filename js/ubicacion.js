@@ -4,7 +4,7 @@
 // prompted by your browser. If you see the error "The Geolocation service
 // failed.", it means you probably did not give permission for the browser to
 // locate you.
-
+var posicion;
 function initMap() {
 
 
@@ -246,8 +246,10 @@ function initMap() {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
         lat: position.coords.latitude,
-        lng: position.coords.longitude
+        lng: position.coords.longitude,
+
       };
+      posicion=pos;
       var image = {
         url: 'img/marker-b.svg',
         // This marker is 20 pixels wide by 32 pixels high.
