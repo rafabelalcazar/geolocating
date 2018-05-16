@@ -62,6 +62,15 @@ function initMap() {
         ]
       },
       {
+        "featureType": "landscape.man_made",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#a4a29b"
+          }
+        ]
+      },
+      {
         "featureType": "landscape.natural",
         "elementType": "geometry",
         "stylers": [
