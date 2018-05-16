@@ -6,6 +6,9 @@
 // locate you.
 
 function initMap() {
+
+
+
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 2.4466152 , lng: -76.5981539},
     zoom: 14.5,
@@ -234,6 +237,8 @@ function initMap() {
       }
     ]
   });
+
+  
   var infoWindow = new google.maps.InfoWindow({map: map});
 
   // Try HTML5 geolocation.
@@ -243,9 +248,28 @@ function initMap() {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
+      var image = {
+        url: 'img/marker-b.svg',
+        // This marker is 20 pixels wide by 32 pixels high.
+        size: new google.maps.Size(30, 30),
+        // The origin for this image is (0, 0).
+        origin: new google.maps.Point(0, 0),
+        // The anchor for this image is the base of the flagpole at (0, 32).
+        anchor: new google.maps.Point(15, 15),
+        scaledSize: new google.maps.Size(30, 30)
+      };
+
+      var marker = new google.maps.Marker({
+        position: pos,
+        map: map,
+        icon: image,
+        title: 'Mi ubicación',
+        animation: google.maps.Animation.DROP,
+      });
+
 
       infoWindow.setPosition(pos);
-      infoWindow.setContent('Location found.');
+      infoWindow.setContent('Estoy aquí');
       map.setCenter(pos);
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
