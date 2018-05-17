@@ -237,9 +237,19 @@ function initMap() {
       }
     ]
   });
-
   
   var infoWindow = new google.maps.InfoWindow({map: map});
+  var t = 3000;
+  function myFunction() {
+    setInterval(function () {
+      
+
+
+      
+      console.log(posicion)       
+     }, t);
+  }
+ 
 
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
