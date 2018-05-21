@@ -9,6 +9,7 @@ var marker;
 var pos;
 var image;
 var map;
+var contador = 0;
 function initMap() {
 
   map = new google.maps.Map(document.getElementById('map'), {
@@ -301,14 +302,13 @@ function initMap() {
 
 function refreshMarker() {
   if (navigator.geolocation) {
+    contador++;
     setMapOnAll(null);
     navigator.geolocation.getCurrentPosition(function (position) {
       pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
-        
       };
-      
       marker = new google.maps.Marker({
         position: pos,
         map: map,
@@ -316,12 +316,32 @@ function refreshMarker() {
         title: 'Mi ubicación',
         zIndex: 3
       });
-
     })
   }
-
   console.log(pos)
-
-
-
+}
+marker.addListener('click', function () {
+  posicion = marker.getPosition();
+  var markerString = '<div class="infoWindow"><p>Latitud: </p>' + posicionInicio.lat() + ',<br><p>Longitud: </p>' + posicionInicio.lng() + ',<br><p>Velocidad: </p>' + posicionInicio.speed + ',<br><p>#: </p>' + contador + '</div>';
+  var infoWindow = new google.maps.InfoWindow({
+      content: markerString,
+      maxWidth: 400
+  });
+  toggleBounce();
+  infoWindow.open(map, marker);
+  //calculateAndDisplayRoute();
+  setTimeout(function () {
+      infoWindow.setMap(null);
+  }, 1500);
+});
+function toggleBounce() {
+  if (marker.getAnimation() != null) {
+      marker.setAnimation(null);
+  }
+  else {
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+      setTimeout(function (){
+          marker.setAnimation(null);
+      }, 500); 
+  }
 }
