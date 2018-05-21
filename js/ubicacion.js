@@ -4,15 +4,17 @@
 // prompted by your browser. If you see the error "The Geolocation service
 // failed.", it means you probably did not give permission for the browser to
 // locate you.
-var posicion;
+
+var marker;
+var pos;
+var image;
+var map;
 function initMap() {
 
-
-
-  var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 2.4466152 , lng: -76.5981539},
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: 2.4466152, lng: -76.5981539 },
     zoom: 14.5,
-    styles:[
+    styles: [
       {
         "elementType": "geometry",
         "stylers": [
@@ -237,30 +239,19 @@ function initMap() {
       }
     ]
   });
-  
-  var infoWindow = new google.maps.InfoWindow({map: map});
-  var t = 3000;
-  function myFunction() {
-    setInterval(function () {
-      
 
-
-      
-      console.log(posicion)       
-     }, t);
-  }
- 
+  var infoWindow = new google.maps.InfoWindow({ map: map });
 
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
 
       };
-      posicion=pos;
-      var image = {
+
+      image = {
         url: 'img/marker-b.svg',
         // This marker is 20 pixels wide by 32 pixels high.
         size: new google.maps.Size(30, 30),
@@ -271,7 +262,7 @@ function initMap() {
         scaledSize: new google.maps.Size(30, 30)
       };
 
-      var marker = new google.maps.Marker({
+      marker = new google.maps.Marker({
         position: pos,
         map: map,
         icon: image,
@@ -280,23 +271,57 @@ function initMap() {
       });
 
 
+      setTimeout(refreshMarker, 10000);
+
       infoWindow.setPosition(pos);
       infoWindow.setContent('Estoy aquí');
       map.setCenter(pos);
-    }, function() {
-      handleLocationError(true, infoWindow, map.getCenter());
-    });
+    },
+
+      function () {
+        handleLocationError(true, infoWindow, map.getCenter());
+      });
   } else {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   }
 }
 
+
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   alert("Por favor vaya a configuraciones y encienda su GPS");
   alert("Luego recargue la página");
   infoWindow.setContent(browserHasGeolocation ?
-                        'Error: The Geolocation service failed.' :
-                        'Error: Your browser doesn\'t support geolocation.');
+    'Error: The Geolocation service failed.' :
+    'Error: Your browser doesn\'t support geolocation.');
+}
+
+
+
+function refreshMarker() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+
+      };
+
+      marker = new google.maps.Marker({
+        position: pos,
+        map: map,
+        icon: image,
+        title: 'Mi ubicación',
+        animation: google.maps.Animation.DROP,
+      });
+      // marker.setMap(null);
+
+    })
+  }
+
+  console.log(pos)
+
+
+
 }
