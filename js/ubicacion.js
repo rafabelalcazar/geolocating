@@ -301,7 +301,7 @@ function initMap() {
 
 function refreshMarker() {
   if (navigator.geolocation) {
-    marker.setMap(null);
+    setMapOnAll(null);
     navigator.geolocation.getCurrentPosition(function (position) {
       pos = {
         lat: position.coords.latitude,
@@ -314,6 +314,7 @@ function refreshMarker() {
         map: map,
         icon: image,
         title: 'Mi ubicación',
+        zIndex: 3
       });
 
     })
