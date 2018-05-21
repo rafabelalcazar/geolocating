@@ -288,34 +288,33 @@ function initMap() {
 }
 
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  infoWindow.setPosition(pos);
-  alert("Por favor vaya a configuraciones y encienda su GPS");
-  alert("Luego recargue la página");
-  infoWindow.setContent(browserHasGeolocation ?
-    'Error: The Geolocation service failed.' :
-    'Error: Your browser doesn\'t support geolocation.');
-}
+// function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+//   infoWindow.setPosition(pos);
+//   alert("Por favor vaya a configuraciones y encienda su GPS");
+//   alert("Luego recargue la página");
+//   infoWindow.setContent(browserHasGeolocation ?
+//     'Error: The Geolocation service failed.' :
+//     'Error: Your browser doesn\'t support geolocation.');
+// }
 
 
 
 function refreshMarker() {
   if (navigator.geolocation) {
+    marker.setMap(null);
     navigator.geolocation.getCurrentPosition(function (position) {
       pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
-
+        
       };
-
+      
       marker = new google.maps.Marker({
         position: pos,
         map: map,
         icon: image,
         title: 'Mi ubicación',
-        animation: google.maps.Animation.DROP,
       });
-      // marker.setMap(null);
 
     })
   }
