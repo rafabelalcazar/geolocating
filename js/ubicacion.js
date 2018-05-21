@@ -302,36 +302,22 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 function refreshMarker() {
   if (navigator.geolocation) {
-<<<<<<< HEAD
-    contador++;
-    clearMarkers();
-=======
->>>>>>> parent of e3abcb8... Eliminar marcador preexistente
     navigator.geolocation.getCurrentPosition(function (position) {
       pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
-<<<<<<< HEAD
-      };
-=======
 
       };
 
->>>>>>> parent of e3abcb8... Eliminar marcador preexistente
       marker = new google.maps.Marker({
         position: pos,
         map: map,
         icon: image,
         title: 'Mi ubicación',
-<<<<<<< HEAD
-        zIndex: 3
-      });
-=======
         animation: google.maps.Animation.DROP,
       });
       // marker.setMap(null);
 
->>>>>>> parent of e3abcb8... Eliminar marcador preexistente
     })
   }
   console.log(pos)
