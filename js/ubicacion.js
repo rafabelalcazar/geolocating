@@ -272,7 +272,7 @@ function initMap() {
       });
 
 
-      setTimeout(refreshMarker, 10000);
+      
 
       infoWindow.setPosition(pos);
       infoWindow.setContent('Estoy aquí');
@@ -288,6 +288,8 @@ function initMap() {
   }
 }
 
+setInterval(refreshMarker, 5000);
+
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
@@ -302,6 +304,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 function refreshMarker() {
   if (navigator.geolocation) {
+    marker.setMap(null);
     navigator.geolocation.getCurrentPosition(function (position) {
       pos = {
         lat: position.coords.latitude,
@@ -314,36 +317,11 @@ function refreshMarker() {
         map: map,
         icon: image,
         title: 'Mi ubicación',
-        animation: google.maps.Animation.DROP,
       });
-      // marker.setMap(null);
-
     })
   }
   console.log(pos)
 }
-marker.addListener('click', function () {
-  posicion = marker.getPosition();
-  var markerString = '<div class="infoWindow"><p>Latitud: </p>' + posicionInicio.lat() + ',<br><p>Longitud: </p>' + posicionInicio.lng() + ',<br><p>Velocidad: </p>' + posicionInicio.speed + ',<br><p>#: </p>' + contador + '</div>';
-  var infoWindow = new google.maps.InfoWindow({
-      content: markerString,
-      maxWidth: 400
-  });
-  toggleBounce();
-  infoWindow.open(map, marker);
-  //calculateAndDisplayRoute();
-  setTimeout(function () {
-      infoWindow.setMap(null);
-  }, 1500);
-});
-function toggleBounce() {
-  if (marker.getAnimation() != null) {
-      marker.setAnimation(null);
-  }
-  else {
-      marker.setAnimation(google.maps.Animation.BOUNCE);
-      setTimeout(function (){
-          marker.setAnimation(null);
-      }, 500); 
-  }
-}
+
+
+
