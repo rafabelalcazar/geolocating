@@ -303,7 +303,7 @@ function initMap() {
 function refreshMarker() {
   if (navigator.geolocation) {
     contador++;
-    setMapOnAll(null);
+    clearMarkers();
     navigator.geolocation.getCurrentPosition(function (position) {
       pos = {
         lat: position.coords.latitude,
